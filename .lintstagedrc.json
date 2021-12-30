@@ -1,6 +1,7 @@
 {
   "*.ts": [
-    "eslint 'src/**' --fix",
+    "node --version",
+    "yarn eslint 'src/**' --fix",
     "yarn test:staged"
   ]
 }

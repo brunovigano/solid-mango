@@ -13,7 +13,6 @@ export default class SignUpController {
         statusCode: 400,
       };
     }
-
     return ret;
   }
 }
