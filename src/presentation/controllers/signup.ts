@@ -13,6 +13,14 @@ export default class SignUpController {
         statusCode: 400,
       };
     }
+
+    if (!httpRequest.body?.email) {
+      ret = {
+        body: new Error('Missing param: email'),
+        statusCode: 400,
+      };
+    }
+
     return ret;
   }
 }
