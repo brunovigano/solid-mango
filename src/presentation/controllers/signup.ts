@@ -6,13 +6,12 @@ export default class SignUpController {
   static handle(httpRequest: HttpRequest): HttpResponse {
     let ret: HttpResponse;
     const { body } = httpRequest;
+    const requiredParams = ['name', 'email'];
 
-    if (!body.name) {
-      return badRequest(new MissingParamError('name'));
-    }
-
-    if (!body.email) {
-      return badRequest(new MissingParamError('email'));
+    for (const field of requiredParams) {
+      if (!body[field]) {
+        return badRequest(new MissingParamError(field));
+      }
     }
 
     return ret;
