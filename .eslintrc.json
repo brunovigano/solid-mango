@@ -36,6 +36,7 @@
       "error"
     ],
     "class-methods-use-this": "warn",
-    "import/extensions": "off"
+    "import/extensions": "off",
+    "import/prefer-default-export": "off"
   }
 }
