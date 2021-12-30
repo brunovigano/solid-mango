@@ -1,4 +1,16 @@
 {
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ]
+      }
+    }
+  },
   "env": {
     "es2021": true,
     "node": true,
@@ -22,6 +34,8 @@
   "rules": {
     "prettier/prettier": [
       "error"
-    ]
+    ],
+    "class-methods-use-this": "warn",
+    "import/extensions": "off"
   }
 }
