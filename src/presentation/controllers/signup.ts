@@ -4,7 +4,7 @@ interface retorno {
 }
 
 export default class SignUpController {
-  static handle(httpRequest: any | string): retorno {
+  static handle(httpRequest: any): retorno {
     let ret: retorno;
 
     if (!httpRequest.body?.name) {
