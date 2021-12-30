@@ -1,11 +1,8 @@
-interface retorno {
-  statusCode: number;
-  body: string | Error;
-}
+import { HttpRequest, HttpResponse } from '../protocols/http';
 
 export default class SignUpController {
-  static handle(httpRequest: any): retorno {
-    let ret: retorno;
+  static handle(httpRequest: HttpRequest): HttpResponse {
+    let ret: HttpResponse;
 
     if (!httpRequest.body?.name) {
       ret = {
