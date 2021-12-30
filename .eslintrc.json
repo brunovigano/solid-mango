@@ -35,7 +35,7 @@
     "prettier/prettier": [
       "error"
     ],
-    "class-methods-use-this": "warn",
+    "class-methods-use-this": "off",
     "import/extensions": "off",
     "import/prefer-default-export": "off",
     "no-restricted-syntax": "off"
