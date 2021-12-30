@@ -8,7 +8,10 @@ export default class SignUpController {
     let ret: retorno;
 
     if (!httpRequest.body?.name) {
-      ret = { body: new Error('Missing param: name'), statusCode: 400 };
+      ret = {
+        body: new Error('Missing param: name'),
+        statusCode: 400,
+      };
     }
 
     return ret;
