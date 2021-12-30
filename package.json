@@ -13,6 +13,8 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-prettier": "^4.0.0",
+    "git-commit-msg-linter": "^3.2.8",
+    "husky": "4",
     "jest": "^27.4.5",
     "prettier": "^2.5.1",
     "ts-jest": "^27.1.2",
@@ -21,6 +23,11 @@
   "scripts": {
     "test": "jest",
     "test:staged": "jest"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "eslint 'src/**' --fix"
+    }
   },
   "dependencies": {}
 }
