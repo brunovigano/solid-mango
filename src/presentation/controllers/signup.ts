@@ -6,7 +6,7 @@ export default class SignUpController {
   static handle(httpRequest: HttpRequest): HttpResponse {
     let ret: HttpResponse;
     const { body } = httpRequest;
-    const requiredParams = ['name', 'email'];
+    const requiredParams = ['name', 'email', 'password'];
 
     for (const field of requiredParams) {
       if (!body[field]) {
