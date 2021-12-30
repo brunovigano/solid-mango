@@ -2,6 +2,7 @@ interface retorno {
   statusCode: number;
   body: string | Error;
 }
+
 export default class SignUpController {
   static handle(httpRequest: any): retorno {
     let ret: retorno;
