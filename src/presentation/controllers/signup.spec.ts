@@ -90,9 +90,7 @@ describe('SignUp Controller', () => {
   });
 
   test('return 400 if a password confirmation fails', () => {
-    const { sut, emailValidatorStub } = makeSut();
-    // jest.spyOn(emailValidatorStub, 'isValid').mockReturnValueOnce(false);
-
+    const { sut } = makeSut();
     const httpRequest = {
       body: {
         name: 'any_name',
