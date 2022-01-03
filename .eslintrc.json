@@ -38,6 +38,7 @@
     "class-methods-use-this": "off",
     "import/extensions": "off",
     "import/prefer-default-export": "off",
-    "no-restricted-syntax": "off"
+    "no-restricted-syntax": "off",
+    "no-unused-vars": "error"
   }
 }
