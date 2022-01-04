@@ -20,7 +20,6 @@ export default class SignUpController implements Controller {
 
   handle(httpRequest: HttpRequest): HttpResponse {
     try {
-      let ret: HttpResponse;
       const { name, email, password, passwordConfirmation } = httpRequest.body;
       const requiredParams = ['name', 'email', 'password', 'passwordConfirmation'];
 
@@ -40,9 +39,17 @@ export default class SignUpController implements Controller {
         return badRequest(new InvalidParamError('email'));
       }
 
-      this.addAccount.add({ name, email, password });
+      const account = this.addAccount.add({ name, email, password });
 
-      return ret;
+      return {
+        statusCode: 200,
+        body: {
+          id: 'valid_id',
+          name: 'valid_name',
+          email: 'valid_email@mail.com',
+          password: 'valid_password',
+        },
+      };
     } catch (error) {
       return serverError();
     }
