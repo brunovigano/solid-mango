@@ -40,6 +40,6 @@
     "import/prefer-default-export": "off",
     "no-restricted-syntax": "off",
     "max-classes-per-file": "off",
-    "no-promise-executor-return": "warn"
+    "no-promise-executor-return": "off"
   }
 }
