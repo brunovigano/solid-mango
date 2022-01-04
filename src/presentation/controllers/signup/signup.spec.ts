@@ -13,7 +13,7 @@ const makeEmailValidator = () => {
     }
   }
 
-  return new EmailValidatorStub();
+  return new EmailValidatorStub()
 }
 
 const makeAddAccount = (): AddAccount => {
@@ -238,7 +238,7 @@ describe('SignUp Controller', () => {
 
     const httpResponse = await sut.handle(httpRequest)
 
-    expect(httpResponse.statusCode).toBe(2000)
+    expect(httpResponse.statusCode).toBe(200)
     expect(httpResponse.body).toEqual({
       id: 'valid_id',
       name: 'valid_name',
