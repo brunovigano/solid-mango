@@ -9,6 +9,7 @@ export class DbAddAccount implements AddAccount {
     this.encrypter = encrypter
   }
 
+  // eslint-disable-next-line consistent-return
   async add(account: AddAccountModel): Promise<AccountModel> {
     await this.encrypter.encrypt(account.password)
     return new Promise(resolve => resolve(null))
