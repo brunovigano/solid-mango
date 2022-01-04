@@ -48,7 +48,7 @@ const makeSut = (): SutTypes => {
 };
 
 describe('SignUp Controller', () => {
-  test('return 400 if no name is provided', () => {
+  test('return return 400 if no name is provided', () => {
     const { sut } = makeSut();
     const httpRequest = {
       body: {
@@ -63,7 +63,7 @@ describe('SignUp Controller', () => {
     expect(httpResponse.body).toEqual(new MissingParamError('name'));
   });
 
-  test('return 400 if no email is provided', () => {
+  test('return return 400 if no email is provided', () => {
     const { sut } = makeSut();
     const httpRequest = {
       body: {
@@ -78,7 +78,7 @@ describe('SignUp Controller', () => {
     expect(httpResponse.body).toEqual(new MissingParamError('email'));
   });
 
-  test('return 400 if no password is provided', () => {
+  test('return return 400 if no password is provided', () => {
     const { sut } = makeSut();
     const httpRequest = {
       body: {
@@ -93,7 +93,7 @@ describe('SignUp Controller', () => {
     expect(httpResponse.body).toEqual(new MissingParamError('password'));
   });
 
-  test('return 400 if no password confirmation is provided', () => {
+  test('return return 400 if no password confirmation is provided', () => {
     const { sut } = makeSut();
     const httpRequest = {
       body: {
@@ -108,7 +108,7 @@ describe('SignUp Controller', () => {
     expect(httpResponse.body).toEqual(new MissingParamError('passwordConfirmation'));
   });
 
-  test('return 400 if a password confirmation fails', () => {
+  test('return return 400 if a password confirmation fails', () => {
     const { sut } = makeSut();
     const httpRequest = {
       body: {
@@ -124,7 +124,7 @@ describe('SignUp Controller', () => {
     expect(httpResponse.body).toEqual(new InvalidParamError('passwordConfirmation'));
   });
 
-  test('return 400 if a invalid email is provided', () => {
+  test('return return 400 if a invalid email is provided', () => {
     const { sut, emailValidatorStub } = makeSut();
     jest.spyOn(emailValidatorStub, 'isValid').mockReturnValueOnce(false);
 
@@ -218,5 +218,28 @@ describe('SignUp Controller', () => {
     const httpResponse = sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(500);
     expect(httpResponse.body).toEqual(new ServerError());
+  });
+
+  test('should return 200 if a valid data is provided', () => {
+    const { sut } = makeSut();
+
+    const httpRequest = {
+      body: {
+        name: 'valid_name',
+        email: 'valid_email@mail.com',
+        password: 'valid_password',
+        passwordConfirmation: 'valid_password',
+      },
+    };
+
+    const httpResponse = sut.handle(httpRequest);
+
+    expect(httpResponse.statusCode).toBe(200);
+    expect(httpResponse.body).toEqual({
+      id: 'valid_id',
+      name: 'valid_name',
+      email: 'valid_email@mail.com',
+      password: 'valid_password',
+    });
   });
 });
