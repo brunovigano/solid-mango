@@ -36,5 +36,8 @@
   },
   "dependencies": {
     "validator": "^13.7.0"
+  },
+  "engines": {
+    "node": "17.3.0"
   }
 }
