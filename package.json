@@ -12,7 +12,7 @@
     "test:ci": "npm run test -- --coverage",
     "prepare": "husky install",
     "pre-commit-lint": "npx lint-staged",
-    "start": "sucrase-node src/main/server.ts"
+    "start": "sucrase-node src/main/server.ts --trace-warnings"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.0.1",
