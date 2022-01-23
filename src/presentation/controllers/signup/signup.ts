@@ -5,19 +5,24 @@ import { badRequest, ok, serverError } from '../../helpers/http-helper'
 import { Controller } from '../../protocols/controller'
 import { EmailValidator } from '../../protocols/email-validator'
 import { HttpRequest, HttpResponse } from '../../protocols/http'
+import { Validation } from './signup-protocols'
 
-export default class SignUpController implements Controller {
+export class SignUpController implements Controller {
   private readonly emailValidator: EmailValidator
 
   private readonly addAccount: AddAccount
 
-  constructor(emailValidator: EmailValidator, addAccount: AddAccount) {
+  private readonly validation: Validation
+
+  constructor(emailValidator: EmailValidator, addAccount: AddAccount, validation?: Validation) {
     this.emailValidator = emailValidator
     this.addAccount = addAccount
+    this.validation = validation
   }
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
+      this.validation.validate(httpRequest.body)
       const { name, email, password, passwordConfirmation } = httpRequest.body
       const requiredParams = ['name', 'email', 'password', 'passwordConfirmation']
 
