@@ -4,7 +4,6 @@ import { HttpRequest, HttpResponse } from '../../presentation/protocols/http'
 
 export class LogControllerDecorator implements Controller {
   private readonly controller: Controller
-
   private readonly logErrorRepository: LogErrorRepository
 
   constructor(controller: Controller, logErrorRepository: LogErrorRepository) {

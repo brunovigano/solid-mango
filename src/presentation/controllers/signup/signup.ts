@@ -6,7 +6,6 @@ import { Validation } from './signup-protocols'
 
 export class SignUpController implements Controller {
   private readonly addAccount: AddAccount
-
   private readonly validation: Validation
 
   constructor(addAccount: AddAccount, validation?: Validation) {

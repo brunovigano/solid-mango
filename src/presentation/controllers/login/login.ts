@@ -9,7 +9,6 @@ import {
 
 export class LoginController implements Controller {
   private readonly validation: Validation
-
   private readonly authentication: Authentication
 
   constructor(validation: Validation, authentication: Authentication) {
