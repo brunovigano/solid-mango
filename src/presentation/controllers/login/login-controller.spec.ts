@@ -5,12 +5,12 @@ import {
   serverError,
   unauthorized,
 } from '../../helpers/http/http-helper'
-import { LoginController } from './login'
+import { LoginController } from './login-controller'
 import {
   Authentication,
   AuthenticationModel,
   Validation,
-} from './login-protocols'
+} from './login-controller-protocols'
 
 interface SutTypes {
   sut: LoginController
