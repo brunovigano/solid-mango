@@ -82,7 +82,9 @@ describe('DbAddAccount Usecase', () => {
 
     jest
       .spyOn(hasherStub, 'hash')
-      .mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+      .mockReturnValueOnce(
+        new Promise((resolve, reject) => reject(new Error()))
+      )
 
     const promiseAccount = sut.add(makeFakeAccountData())
     await expect(promiseAccount).rejects.toThrow()
@@ -93,7 +95,9 @@ describe('DbAddAccount Usecase', () => {
 
     jest
       .spyOn(addAccountRepositoryStub, 'add')
-      .mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+      .mockReturnValueOnce(
+        new Promise((resolve, reject) => reject(new Error()))
+      )
 
     const promiseAccount = sut.add(makeFakeAccountData())
     await expect(promiseAccount).rejects.toThrow()
