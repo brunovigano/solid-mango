@@ -9,7 +9,5 @@ export class JwtAdapter implements Encrypter {
     if (accessToken) {
       return accessToken
     }
-
-    throw new Error('')
   }
 }
