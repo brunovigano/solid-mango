@@ -55,6 +55,7 @@
       {
         "exceptAfterSingleLine": true
       }
-    ]
+    ],
+    "no-useless-constructor": "off"
   }
 }
