@@ -4,6 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "start": "node dist/main/server.js",
+    "build": "rimraf dist && tsc",
+    "start:dev": "sucrase-node src/main/server.ts --trace-warnings",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
     "test:verbose": "jest --passWithNoTests --runInBand",
     "test:unit": "npm run test -- --watch -c jest-unit-config.js",
@@ -11,8 +14,7 @@
     "test:staged": "npm run test -- --findRelatedTests",
     "test:ci": "npm run test -- --coverage",
     "prepare": "husky install",
-    "pre-commit-lint": "npx lint-staged",
-    "start": "sucrase-node src/main/server.ts --trace-warnings"
+    "pre-commit-lint": "npx lint-staged"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.0.1",
@@ -38,6 +40,7 @@
     "jest": "^27.4.5",
     "lint-staged": "^12.1.4",
     "prettier": "^2.5.1",
+    "rimraf": "^3.0.2",
     "sucrase": "3.12.1",
     "supertest": "4.0.2",
     "ts-jest": "^27.1.2",
@@ -46,7 +49,6 @@
   "dependencies": {
     "bcrypt": "^5.0.1",
     "express": "4.17.1",
-    "fast-glob": "^3.2.10",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "3.5.1",
     "validator": "^13.7.0"
