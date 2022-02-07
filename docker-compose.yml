@@ -10,12 +10,12 @@ services:
       - '27017:27017'
   api:
     container_name: api-container
+    image: node:17
+    working_dir: /usr/src/solid-mango
     restart: always
-    build: .
-    image: solid-mango
-    command: yarn debug
+    command: bash -c "yarn --prod && yarn debug"
     volumes:
-      - ./dist:/usr/src/solid-mango/dist
+      - ./dist/:/usr/src/solid-mango/dist
       - ./package.json:/usr/src/solid-mango/package.json
     ports:
       - '5050:5050'
