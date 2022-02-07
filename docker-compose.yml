@@ -13,10 +13,12 @@ services:
     restart: always
     build: .
     image: solid-mango
-    command: yarn start
+    command: yarn debug
     volumes:
       - ./dist:/usr/src/solid-mango/dist
+      - ./package.json:/usr/src/solid-mango/package.json
     ports:
       - '5050:5050'
+      - '9222:9222'
     links:
       - mongo
