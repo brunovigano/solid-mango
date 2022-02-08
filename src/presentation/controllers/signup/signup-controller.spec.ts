@@ -1,10 +1,5 @@
 import { EmailInUseError, MissingParamError, ServerError } from '../../errors'
-import {
-  badRequest,
-  forbidden,
-  ok,
-  serverError,
-} from '../../helpers/http/http-helper'
+import { badRequest, forbidden, ok, serverError } from '../../helpers/http/http-helper'
 import { SignUpController } from './signup-controller'
 import {
   AccountModel,
@@ -71,11 +66,7 @@ const makeSut = (): SutTypes => {
   const addAccountStub = makeAddAccount()
   const validationStub = makeValidation()
   const authenticationStub = makeAuthentication()
-  const sut = new SignUpController(
-    addAccountStub,
-    validationStub,
-    authenticationStub
-  )
+  const sut = new SignUpController(addAccountStub, validationStub, authenticationStub)
 
   return {
     sut,
@@ -117,9 +108,7 @@ describe('SignUp Controller', () => {
 
   test('should return 403 if addAccount returns null', async () => {
     const { sut, addAccountStub } = makeSut()
-    jest
-      .spyOn(addAccountStub, 'add')
-      .mockReturnValueOnce(new Promise(resolve => resolve(null)))
+    jest.spyOn(addAccountStub, 'add').mockReturnValueOnce(new Promise(resolve => resolve(null)))
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(forbidden(new EmailInUseError()))
   })
@@ -134,9 +123,7 @@ describe('SignUp Controller', () => {
 
   test('should return 400 if Validation returns an error', async () => {
     const { sut, validationStub } = makeSut()
-    jest
-      .spyOn(validationStub, 'validate')
-      .mockReturnValueOnce(new MissingParamError('any_field'))
+    jest.spyOn(validationStub, 'validate').mockReturnValueOnce(new MissingParamError('any_field'))
     const httpRequest = makeFakeRequest()
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual(badRequest(new MissingParamError('any_field')))
@@ -156,9 +143,7 @@ describe('SignUp Controller', () => {
     const { sut, authenticationStub } = makeSut()
     jest
       .spyOn(authenticationStub, 'auth')
-      .mockReturnValueOnce(
-        new Promise((resolve, reject) => reject(new Error()))
-      )
+      .mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(serverError(new Error()))
   })
