@@ -1,4 +1,3 @@
-import { access } from 'fs'
 import { AddAccount } from '../../../domain/usecases/add-account'
 import { EmailInUseError } from '../../errors'
 import {
@@ -28,11 +27,12 @@ export class SignUpController implements Controller {
       }
 
       const account = await this.addAccount.add({ name, email, password })
-      const accessToken = await this.authentication.auth({ email, password })
 
       if (!account) {
         return forbidden(new EmailInUseError())
       }
+
+      const accessToken = await this.authentication.auth({ email, password })
 
       return ok({ accessToken })
     } catch (error) {

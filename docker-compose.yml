@@ -13,7 +13,7 @@ services:
     image: node:17
     working_dir: /usr/src/solid-mango
     restart: always
-    command: bash -c "yarn --prod && yarn debug"
+    command: bash -c "yarn --prod && yarn start"
     volumes:
       - ./dist/:/usr/src/solid-mango/dist
       - ./package.json:/usr/src/solid-mango/package.json
