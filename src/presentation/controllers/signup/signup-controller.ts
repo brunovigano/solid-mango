@@ -1,3 +1,4 @@
+import { access } from 'fs'
 import { AddAccount } from '../../../domain/usecases/add-account'
 import { badRequest, ok, serverError } from '../../helpers/http/http-helper'
 import { Controller } from '../../protocols/controller'
@@ -20,10 +21,10 @@ export class SignUpController implements Controller {
         return badRequest(error)
       }
 
-      const account = await this.addAccount.add({ name, email, password })
-      await this.authentication.auth({ email, password })
+      await this.addAccount.add({ name, email, password })
+      const accessToken = await this.authentication.auth({ email, password })
 
-      return ok(account)
+      return ok({ accessToken })
     } catch (error) {
       return serverError(error)
     }
