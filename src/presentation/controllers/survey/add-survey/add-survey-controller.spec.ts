@@ -5,7 +5,7 @@ import {
   AddSurveyModel,
 } from './add-survey-controller-protocols'
 import { AddSurveyController } from './add-survey-controller'
-import { badRequest, serverError } from '../../../helpers/http/http-helper'
+import { badRequest, noContent, serverError } from '../../../helpers/http/http-helper'
 
 interface SutTypes {
   validationStub: Validation
@@ -81,5 +81,11 @@ describe('AddSurvey Controller', () => {
       .mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(serverError(new Error()))
+  })
+
+  test('should return 204 on success', async () => {
+    const { sut } = makeSut()
+    const httpResponse = await sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(noContent())
   })
 })
