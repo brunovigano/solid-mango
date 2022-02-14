@@ -4,7 +4,7 @@ import { HttpRequest, Middleware } from '../../presentation/protocols'
 export const adaptMiddleware = (middleware: Middleware) => {
   return async (req: Request, res: Response, next: NextFunction) => {
     const httpRequest: HttpRequest = {
-      headers: req.header,
+      headers: req.headers,
     }
 
     const httpResponse = await middleware.handle(httpRequest)
