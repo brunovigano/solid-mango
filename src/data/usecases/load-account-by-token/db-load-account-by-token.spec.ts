@@ -91,4 +91,22 @@ describe('DbLoadAccountByToken Usecase', () => {
     const account = await sut.load('any_token', 'any_role')
     expect(account).toEqual(makeFakeAccount())
   })
+
+  test('should throw if Decrypter throws', async () => {
+    const { decrypterStub, sut } = makeSut()
+    jest
+      .spyOn(decrypterStub, 'decrypt')
+      .mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    const promiseAccount = sut.load('any_token', 'any_role')
+    await expect(promiseAccount).rejects.toThrow()
+  })
+
+  test('should throw if LoadAccountByTokenRepository throws', async () => {
+    const { loadAccountByTokenRepositoryStub, sut } = makeSut()
+    jest
+      .spyOn(loadAccountByTokenRepositoryStub, 'loadByToken')
+      .mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    const promiseAccount = sut.load('any_token', 'any_role')
+    await expect(promiseAccount).rejects.toThrow()
+  })
 })
