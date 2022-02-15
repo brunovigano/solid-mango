@@ -27,6 +27,7 @@ describe('Survey Mongo Repository', () => {
     await sut.add({
       question: 'any_question',
       answers: [{ answer: 'any_answer' }],
+      date: new Date(),
     })
     const survey = await surveyCollection.findOne({ question: 'any_question' })
     expect(survey).toBeTruthy()
