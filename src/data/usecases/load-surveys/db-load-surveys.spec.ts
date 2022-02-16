@@ -7,7 +7,7 @@ interface SutTypes {
   loadSurveysRepositoryStub: LoadSurveysRepository
 }
 
-const makeFakeSurvey = (): SurveyModel[] => [
+const makeFakeSurveys = (): SurveyModel[] => [
   {
     date: new Date(),
     id: 'any_id',
@@ -37,7 +37,7 @@ const makeLoadSurveysRepository = (): LoadSurveysRepository => {
   class LoadSurveysStub implements LoadSurveysRepository {
     loadAll(): Promise<SurveyModel[]> {
       return new Promise(resolve => {
-        resolve(makeFakeSurvey())
+        resolve(makeFakeSurveys())
       })
     }
   }
@@ -56,29 +56,17 @@ const makeSut = (): SutTypes => {
 }
 
 describe('DbLoadSurveys Usecase', () => {
-  // test('should call Decrypter with correct values', async () => {
-  //   const { sut, decrypterStub } = makeSut()
-  //   const decryptSpy = jest.spyOn(decrypterStub, 'decrypt')
-  //   await sut.load('any_token', 'any_role')
-  //   expect(decryptSpy).toHaveBeenCalledWith('any_token')
-  // })
-
-  // test('should return null if Decrypter return null', async () => {
-  //   const { sut, decrypterStub } = makeSut()
-  //   jest.spyOn(decrypterStub, 'decrypt').mockReturnValueOnce(
-  //     new Promise(resolve => {
-  //       resolve(null)
-  //     })
-  //   )
-  //   const account = await sut.load('any_token', 'any_role')
-  //   expect(account).toBeNull()
-  // })
-
   test('should call LoadSurveysRepository', async () => {
     const { sut, loadSurveysRepositoryStub } = makeSut()
     const loadAllSpy = jest.spyOn(loadSurveysRepositoryStub, 'loadAll')
     await sut.load()
     expect(loadAllSpy).toHaveBeenCalled()
+  })
+
+  test('should return a list of surveys on success', async () => {
+    const { sut } = makeSut()
+    const surveys = await sut.load()
+    expect(surveys).toEqual(makeFakeSurveys())
   })
 
   // test('should return null if LoadAccountByTokenRepository return null', async () => {
