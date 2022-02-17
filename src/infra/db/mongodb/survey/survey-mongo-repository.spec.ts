@@ -4,6 +4,10 @@ import { SurveyMongoRepository } from './survey-mongo-repository'
 
 let surveyCollection: Collection
 
+const makeSut = () => {
+  return new SurveyMongoRepository()
+}
+
 describe('Survey Mongo Repository', () => {
   beforeAll(async () => {
     await MongoHelper.connect(process.env.MONGO_URL)
@@ -18,18 +22,16 @@ describe('Survey Mongo Repository', () => {
     await surveyCollection.deleteMany({})
   })
 
-  const makeSut = () => {
-    return new SurveyMongoRepository()
-  }
-
-  test('should add a survey on success', async () => {
-    const sut = makeSut()
-    await sut.add({
-      question: 'any_question',
-      answers: [{ answer: 'any_answer' }],
-      date: new Date(),
+  describe('add()', () => {
+    test('should add a survey on success', async () => {
+      const sut = makeSut()
+      await sut.add({
+        question: 'any_question',
+        answers: [{ answer: 'any_answer' }],
+        date: new Date(),
+      })
+      const survey = await surveyCollection.findOne({ question: 'any_question' })
+      expect(survey).toBeTruthy()
     })
-    const survey = await surveyCollection.findOne({ question: 'any_question' })
-    expect(survey).toBeTruthy()
   })
 })

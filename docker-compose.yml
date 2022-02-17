@@ -19,6 +19,6 @@ services:
       - ./package.json:/usr/src/solid-mango/package.json
     ports:
       - '5050:5050'
-      - '9222:9222'
+      - '9999:9222'
     links:
       - mongo
