@@ -11,7 +11,7 @@ import {
   Validation,
 } from './signup-controller-protocols'
 
-interface SutTypes {
+type SutTypes = {
   sut: SignUpController
   addAccountStub: AddAccount
   validationStub: Validation
