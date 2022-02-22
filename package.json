@@ -9,7 +9,7 @@
     "debug": "nodemon -L --watch ./dist --inspect=0.0.0.0:9999 -nolazy ./dist/main/server.js",
     "down": "docker-compose down",
     "up": "yarn build && docker-compose up",
-    "start:dev": "ts-node-dev -r tsconfig-paths/register src/main/server.ts",
+    "start:dev": "yarn build && ts-node-dev -r tsconfig-paths/register src/main/server.ts",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
     "test:verbose": "jest --passWithNoTests --runInBand",
     "test:unit": "yarn test -- --watch -c jest-unit-config.js",
