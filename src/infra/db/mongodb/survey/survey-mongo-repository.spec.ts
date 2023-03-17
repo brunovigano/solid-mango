@@ -56,6 +56,17 @@ describe('Survey Mongo Repository', () => {
       expect(surveys[1].question).toBe('other_question')
     })
 
+    test('should load survey by id on success', async () => {
+      const survey = await surveyCollection.insertOne({
+        question: 'any_question',
+        answers: [{ answer: 'any_answer' }],
+        date: new Date(),
+      })
+      const sut = makeSut()
+      const surveys = await sut.loadById(survey.ops[0]._id)
+      expect(surveys.question).toBe('any_question')
+    })
+
     test('should load empty list', async () => {
       const sut = makeSut()
       const surveys = await sut.loadAll()
