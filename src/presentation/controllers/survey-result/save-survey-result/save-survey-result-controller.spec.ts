@@ -17,12 +17,15 @@ const makeFakeSurvey = (): SurveyModel => ({
 
 const makeFakeRequest = (): HttpRequest => ({
   params: { surveyId: 'any_survey_id' },
+  body: {
+    answer: 'any_answer',
+  },
 })
 
 const makeLoadSurveyById = (): LoadSurveyById => {
   class LoadSurveyByIdStub implements LoadSurveyById {
     async loadById(id: string): Promise<SurveyModel> {
-      return new Promise((resolve, reject) => {
+      return new Promise(resolve => {
         resolve(makeFakeSurvey())
       })
     }
@@ -58,6 +61,17 @@ describe('SaveSurveyResult Controller', () => {
     )
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(forbidden(new InvalidParamError('surveyId')))
+  })
+
+  test('should returns 403 if an invalid answer is provided', async () => {
+    const { sut } = makeSut()
+    const httpResponse = await sut.handle({
+      params: { surveyId: 'any_survey_id' },
+      body: {
+        answer: 'wrong_answer',
+      },
+    })
+    expect(httpResponse).toEqual(forbidden(new InvalidParamError('answer')))
   })
 
   test('should return 500 if LoadSurveyById throws', async () => {
