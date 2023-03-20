@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node dist/main/server.js",
     "build": "rimraf dist && tsc -p tsconfig-build.json",
-    "debug": "nodemon -L --watch ./dist --inspect=0.0.0.0:9999 -nolazy ./dist/main/server.js",
+    "debug": "nodemon -L --watch ./dist --inspect=0.0.0.0:9222 -nolazy ./dist/main/server.js",
     "down": "docker-compose down",
     "up": "yarn build && docker-compose up",
     "start:dev": "ts-node-dev -r tsconfig-paths/register src/main/server.ts",

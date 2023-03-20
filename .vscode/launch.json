@@ -8,7 +8,7 @@
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "type": "pwa-node"
+      "type": "node"
     },
     {
       "type": "node",
@@ -17,6 +17,13 @@
       "remoteRoot": "/usr/src/solid-mango",
       "port": 9222,
       "restart": true,
-    }
+    },
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Attach to Node",
+      "port": 9222,
+      "restart": true,
+    },
   ]
 }
