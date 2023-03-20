@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongodb'
 import {
   SaveSurveyResultModel,
   SaveSurveyResultRepository,
@@ -10,7 +11,7 @@ export class SurveyResultMongoRepository implements SaveSurveyResultRepository {
     const surveyResultCollection = await MongoHelper.getCollection('surveyResults')
     const res = await surveyResultCollection.findOneAndUpdate(
       {
-        surveyId: data.surveyId,
+        surveyId: new ObjectId(data.surveyId),
         accountId: data.accountId,
       },
       {
