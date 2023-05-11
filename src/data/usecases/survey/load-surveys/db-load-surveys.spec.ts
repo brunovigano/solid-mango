@@ -1,40 +1,16 @@
 import MockDate from 'mockdate'
+import { mockSurveyModels, throwError } from '@/domain/test'
 import { DbLoadSurveys } from './db-load-surveys'
-import { LoadSurveysRepository, SurveyModel } from './db-load-surveys-protocols'
+import { LoadSurveysRepository } from './db-load-surveys-protocols'
+import { mockLoadSurveysRepository } from '@/data/test'
 
 type SutTypes = {
   sut: DbLoadSurveys
   loadSurveysRepositoryStub: LoadSurveysRepository
 }
 
-const makeFakeSurveys = (): SurveyModel[] => [
-  {
-    date: new Date(),
-    id: 'any_id',
-    question: 'any_question',
-    answers: [{ answer: 'any_answer', image: 'any_image' }],
-  },
-  {
-    date: new Date(),
-    id: 'another_id',
-    question: 'another_question',
-    answers: [{ answer: 'another_answer' }],
-  },
-]
-
-const makeLoadSurveysRepository = (): LoadSurveysRepository => {
-  class LoadSurveysStub implements LoadSurveysRepository {
-    loadAll(): Promise<SurveyModel[]> {
-      return new Promise(resolve => {
-        resolve(makeFakeSurveys())
-      })
-    }
-  }
-  return new LoadSurveysStub()
-}
-
 const makeSut = (): SutTypes => {
-  const loadSurveysRepositoryStub = makeLoadSurveysRepository()
+  const loadSurveysRepositoryStub = mockLoadSurveysRepository()
   const sut = new DbLoadSurveys(loadSurveysRepositoryStub)
   return {
     sut,
@@ -60,14 +36,12 @@ describe('DbLoadSurveys Usecase', () => {
   test('should return a list of surveys on success', async () => {
     const { sut } = makeSut()
     const surveys = await sut.load()
-    expect(surveys).toEqual(makeFakeSurveys())
+    expect(surveys).toEqual(mockSurveyModels())
   })
 
   test('should throw if LoadSurveysRepository throws', async () => {
     const { loadSurveysRepositoryStub, sut } = makeSut()
-    jest
-      .spyOn(loadSurveysRepositoryStub, 'loadAll')
-      .mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    jest.spyOn(loadSurveysRepositoryStub, 'loadAll').mockImplementationOnce(throwError)
     const promiseAccount = sut.load()
     await expect(promiseAccount).rejects.toThrow()
   })
