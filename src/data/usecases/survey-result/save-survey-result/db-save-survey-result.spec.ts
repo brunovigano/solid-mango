@@ -2,14 +2,14 @@ import MockDate from 'mockdate'
 import { DbSaveSurveyResult } from './db-save-survey-result'
 import { SaveSurveyResultRepository } from '@/data/protocols/db/save-result/save-survey-result-repository'
 import { SurveyResultModel } from '@/domain/models/survey-result'
-import { SaveSurveyResultModel } from '@/domain/usecases/survey-result/save-survey-result'
+import { SaveSurveyResultParams } from '@/domain/usecases/survey-result/save-survey-result'
 
 type SutTypes = {
   sut: DbSaveSurveyResult
   saveSurveyResultRepositoryStub: SaveSurveyResultRepository
 }
 
-const makeFakeSaveSurveyResultData = (): SaveSurveyResultModel => ({
+const makeFakeSaveSurveyResultData = (): SaveSurveyResultParams => ({
   accountId: 'any_account',
   answer: 'any_answer',
   date: new Date(),
@@ -23,7 +23,7 @@ const makeFakeSurveyResult = (): SurveyResultModel => ({
 
 const makeFakeSaveSurveyResultRepository = (): SaveSurveyResultRepository => {
   class SaveSurveyResultRepositoryStub implements SaveSurveyResultRepository {
-    save(surveyResult: SaveSurveyResultModel): Promise<SurveyResultModel> {
+    save(surveyResult: SaveSurveyResultParams): Promise<SurveyResultModel> {
       return new Promise(resolve => resolve(makeFakeSurveyResult()))
     }
   }
