@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { mockSurveyResultModel } from '@/domain/test'
-import { SaveSurveyResultRepository } from '@/data/protocols/db/save-result/save-survey-result-repository'
+import { SaveSurveyResultRepository } from '@/data/protocols/db/survey-result/save-survey-result-repository'
 import {
   SaveSurveyResultParams,
   SurveyResultModel,
