@@ -1,14 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import MockDate from 'mockdate'
-import {
-  HttpRequest,
-  Validation,
-  AddSurvey,
-  AddSurveyParams,
-} from './add-survey-controller-protocols'
+import { HttpRequest, Validation, AddSurvey } from './add-survey-controller-protocols'
 import { AddSurveyController } from './add-survey-controller'
 import { badRequest, noContent, serverError } from '@/presentation/helpers/http/http-helper'
 import { throwError } from '@/domain/test'
+import { mockAddSurvey } from '@/presentation/test'
 
 type SutTypes = {
   validationStub: Validation
@@ -25,17 +21,8 @@ const makeValidationStub = () => {
   return new ValidationStub()
 }
 
-const makeAddSurveyStub = () => {
-  class AddSurveyStub implements AddSurvey {
-    add(data: AddSurveyParams): Promise<void> {
-      return new Promise(resolve => resolve())
-    }
-  }
-  return new AddSurveyStub()
-}
-
 const makeSut = (): SutTypes => {
-  const addSurveyStub = makeAddSurveyStub()
+  const addSurveyStub = mockAddSurvey()
   const validationStub = makeValidationStub()
   const sut = new AddSurveyController(validationStub, addSurveyStub)
 
