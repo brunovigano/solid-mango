@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import { Validation } from '@/presentation/protocols'
 
 export class ValidationComposite implements Validation {

@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import { MissingParamError } from '@/presentation/errors'
 import { Validation } from '@/presentation/protocols'
 

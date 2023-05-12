@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Validation } from '@/presentation/protocols/validation'
 import { makeLoginValidation } from './login-validation-factory'
 import { EmailValidator } from '@/validation/protocols/email-validator'

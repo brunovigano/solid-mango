@@ -42,6 +42,7 @@
     "no-restricted-syntax": "off",
     "max-classes-per-file": "off",
     "no-promise-executor-return": "off",
+    "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-var-requires": "off",
     "import/no-extraneous-dependencies": [
       "error",

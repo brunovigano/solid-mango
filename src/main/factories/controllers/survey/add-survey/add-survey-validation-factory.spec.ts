@@ -1,18 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Validation } from '@/presentation/protocols/validation'
 import { makeAddSurveyValidation } from './add-survey-validation-factory'
-import { EmailValidator } from '@/validation/protocols/email-validator'
 import { RequiredFieldValidation, ValidationComposite } from '@/validation/validators'
 
 jest.mock('../../../../../validation/validators/validation-composite')
-
-const makeEmailValidator = (): EmailValidator => {
-  class EmailValidatorStub implements EmailValidator {
-    isValid(email: string): boolean {
-      return true
-    }
-  }
-  return new EmailValidatorStub()
-}
 
 describe('AddSurveyValidation Factory', () => {
   test('should call ValidationComposite with all validations', () => {

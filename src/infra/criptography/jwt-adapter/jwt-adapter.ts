@@ -10,6 +10,7 @@ export class JwtAdapter implements Encrypter, Decrypter {
     if (accessToken) {
       return accessToken
     }
+    return null
   }
 
   async decrypt(token: string): Promise<string> {
