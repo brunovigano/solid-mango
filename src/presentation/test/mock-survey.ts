@@ -8,7 +8,7 @@ import { LoadSurveys } from '@/domain/usecases/survey/load-surveys'
 export const mockAddSurvey = () => {
   class AddSurveyStub implements AddSurvey {
     add(data: AddSurveyParams): Promise<void> {
-      return new Promise(resolve => resolve())
+      return Promise.resolve()
     }
   }
   return new AddSurveyStub()
@@ -17,9 +17,7 @@ export const mockAddSurvey = () => {
 export const mockLoadSurveys = (): LoadSurveys => {
   class LoadSurveysStub implements LoadSurveys {
     async load(): Promise<SurveyModel[]> {
-      return new Promise(resolve => {
-        resolve(mockSurveyModels())
-      })
+      return Promise.resolve(mockSurveyModels())
     }
   }
   return new LoadSurveysStub()
@@ -28,9 +26,7 @@ export const mockLoadSurveys = (): LoadSurveys => {
 export const makeLoadSurveyById = (): LoadSurveyById => {
   class LoadSurveyByIdStub implements LoadSurveyById {
     async loadById(id: string): Promise<SurveyModel> {
-      return new Promise(resolve => {
-        resolve(mockSurveyModel())
-      })
+      return Promise.resolve(mockSurveyModel())
     }
   }
   return new LoadSurveyByIdStub()
