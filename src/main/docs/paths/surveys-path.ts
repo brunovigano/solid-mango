@@ -25,4 +25,32 @@ export const surveyPath = {
       },
     },
   },
+  post: {
+    security: [{ apiKeyAuth: [] }],
+    tags: ['Enquete'],
+    summary: 'Cria nova enquete',
+    requestBody: {
+      content: {
+        'application/json': {
+          schema: {
+            $ref: '#/schemas/addSurveyParams',
+          },
+        },
+      },
+    },
+    responses: {
+      204: {
+        description: 'Sucesso',
+      },
+      403: {
+        $ref: '#/components/forbidden',
+      },
+      404: {
+        $ref: '#/components/notFound',
+      },
+      500: {
+        $ref: '#/components/serverError',
+      },
+    },
+  },
 }
