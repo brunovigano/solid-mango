@@ -1,6 +1,6 @@
-import { loginPath } from './paths/login-path'
-import { accountSchema } from './schemas/account-schema'
-import { loginParamsSchema } from './schemas/login-schema'
+import { badRequest, notFound, serverError, unauthorized } from './components'
+import { loginPath } from './paths'
+import { accountSchema, errorSchema, loginParamsSchema } from './schemas'
 
 export default {
   openapi: '3.0.0',
@@ -8,6 +8,10 @@ export default {
     title: 'Solid Mango',
     description: 'Api maneira.',
     version: '1.0.0',
+  },
+  license: {
+    name: 'GPL-3.0-or-later',
+    url: 'https://spdx.org/licenses/GLP-3.0-or-later.html',
   },
   servers: [
     {
@@ -25,5 +29,12 @@ export default {
   schemas: {
     account: accountSchema,
     loginParams: loginParamsSchema,
+    error: errorSchema,
+  },
+  components: {
+    badRequest,
+    serverError,
+    unauthorized,
+    notFound,
   },
 }
