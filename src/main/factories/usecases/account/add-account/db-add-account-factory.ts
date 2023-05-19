@@ -3,7 +3,7 @@ import { BcryptAdapter } from '@/infra/criptography/bcrypt-adapter/bcrypt-adapte
 import { AccountMongoRepository } from '@/infra/db/mongodb/account/account-mongo-repository'
 import { env } from '@/main/config/env'
 
-export const makeDbAddAccount = (): DbAddAccount => {
+export const mockDbAddAccount = (): DbAddAccount => {
   const { salt } = env
   const accountMongoRepository = new AccountMongoRepository()
   const bCryptAdapter = new BcryptAdapter(salt)
