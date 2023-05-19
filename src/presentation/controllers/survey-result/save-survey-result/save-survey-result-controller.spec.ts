@@ -10,7 +10,7 @@ import {
   SaveSurveyResult,
 } from './save-survey-result-controller-protocols'
 import { mockSurveyResultModel, throwError } from '@/domain/test'
-import { makeLoadSurveyById, mockSaveSurveyResult } from '@/presentation/test'
+import { mockLoadSurveyById, mockSaveSurveyResult } from '@/presentation/test'
 
 const mockRequest = (): HttpRequest => ({
   params: { surveyId: 'any_survey_id' },
@@ -27,7 +27,7 @@ type SutTypes = {
 }
 
 const makeSut = (): SutTypes => {
-  const loadSurveyByIdStub = makeLoadSurveyById()
+  const loadSurveyByIdStub = mockLoadSurveyById()
   const saveSurveyResultStub = mockSaveSurveyResult()
   const sut = new SaveSurveyResultController(loadSurveyByIdStub, saveSurveyResultStub)
   return { sut, loadSurveyByIdStub, saveSurveyResultStub }
