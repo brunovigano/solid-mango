@@ -9,8 +9,8 @@ import { LoadSurveyResultRepository } from '@/data/protocols/db/survey-result/lo
 
 export const mockSaveSurveyResultRepository = (): SaveSurveyResultRepository => {
   class SaveSurveyResultRepositoryStub implements SaveSurveyResultRepository {
-    save(surveyResult: SaveSurveyResultParams): Promise<SurveyResultModel> {
-      return Promise.resolve(mockSurveyResultModel())
+    save(surveyResult: SaveSurveyResultParams): Promise<void> {
+      return Promise.resolve()
     }
   }
 
