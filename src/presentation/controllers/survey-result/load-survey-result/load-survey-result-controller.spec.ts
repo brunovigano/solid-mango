@@ -1,21 +1,26 @@
 import MockDate from 'mockdate'
-import { LoadSurveyById } from '@/domain/usecases/survey/load-survey-by-id'
-import { HttpRequest } from '@/presentation/protocols'
-import { mockLoadSurveyById } from '@/presentation/test'
+import { mockLoadSurveyById, mockLoadSurveyResult } from '@/presentation/test'
 import { LoadSurveyResultController } from './load-survey-result-controller'
 import { forbidden, serverError } from '@/presentation/helpers/http/http-helper'
 import { InvalidParamError } from '@/presentation/errors'
 import { throwError } from '@/domain/test'
+import {
+  HttpRequest,
+  LoadSurveyById,
+  LoadSurveyResult,
+} from './load-survey-result-controller-protocols'
 
 type SutTypes = {
   sut: LoadSurveyResultController
   loadSurveyByIdStub: LoadSurveyById
+  loadSurveyResultStub: LoadSurveyResult
 }
 
 const makeSut = (): SutTypes => {
   const loadSurveyByIdStub = mockLoadSurveyById()
-  const sut = new LoadSurveyResultController(loadSurveyByIdStub)
-  return { sut, loadSurveyByIdStub }
+  const loadSurveyResultStub = mockLoadSurveyResult()
+  const sut = new LoadSurveyResultController(loadSurveyByIdStub, loadSurveyResultStub)
+  return { sut, loadSurveyByIdStub, loadSurveyResultStub }
 }
 
 const mockRequest = (): HttpRequest => ({
@@ -54,5 +59,12 @@ describe('LoadSurveyResult Controller', () => {
     jest.spyOn(loadSurveyByIdStub, 'loadById').mockImplementationOnce(throwError)
     const httpResponse = await sut.handle(mockRequest())
     expect(httpResponse).toEqual(serverError(new Error()))
+  })
+
+  test('should call LoadSurveyResult with correct value', async () => {
+    const { sut, loadSurveyResultStub } = makeSut()
+    const spy = jest.spyOn(loadSurveyResultStub, 'load')
+    await sut.handle(mockRequest())
+    expect(spy).toHaveBeenCalledWith('any_survey_id')
   })
 })
