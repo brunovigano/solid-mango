@@ -6,7 +6,7 @@ import {
 } from '@/validation/validators'
 import { EmailValidatorAdapter } from '@/infra/validators/email-validator-adapter'
 
-export const makeLoginValidation = (): ValidationComposite => {
+export const mockLoginValidation = (): ValidationComposite => {
   const validations: Validation[] = []
   for (const field of ['email', 'password']) {
     validations.push(new RequiredFieldValidation(field))

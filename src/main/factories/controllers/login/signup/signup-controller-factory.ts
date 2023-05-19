@@ -1,15 +1,15 @@
 import { SignUpController } from '@/presentation/controllers/login/signup/signup-controller'
 import { Controller } from '@/presentation/protocols/controller'
-import { makeLogControllerDecorator } from '@/main/factories/decorators/log-controller-decorator-factory'
-import { makeDbAddAccount } from '@/main/factories/usecases/account/add-account/db-add-account-factory'
-import { makeDbAuthentication } from '@/main/factories/usecases/account/authentication/db-authentication-factory'
-import { makeSignUpValidation } from './signup-validation-factory'
+import { mockLogControllerDecorator } from '@/main/factories/decorators/log-controller-decorator-factory'
+import { mockDbAddAccount } from '@/main/factories/usecases/account/add-account/db-add-account-factory'
+import { mockDbAuthentication } from '@/main/factories/usecases/account/authentication/db-authentication-factory'
+import { mockSignUpValidation } from './signup-validation-factory'
 
-export const makeSignUpController = (): Controller => {
+export const mockSignUpController = (): Controller => {
   const controller = new SignUpController(
-    makeDbAddAccount(),
-    makeSignUpValidation(),
-    makeDbAuthentication()
+    mockDbAddAccount(),
+    mockSignUpValidation(),
+    mockDbAuthentication()
   )
-  return makeLogControllerDecorator(controller)
+  return mockLogControllerDecorator(controller)
 }

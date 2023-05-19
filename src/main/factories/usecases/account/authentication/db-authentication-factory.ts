@@ -5,7 +5,7 @@ import { JwtAdapter } from '@/infra/criptography/jwt-adapter/jwt-adapter'
 import { AccountMongoRepository } from '@/infra/db/mongodb/account/account-mongo-repository'
 import { env } from '@/main/config/env'
 
-export const makeDbAuthentication = (): Authentication => {
+export const mockDbAuthentication = (): Authentication => {
   const { jwtSecret, salt } = env
   const accountMongoRepository = new AccountMongoRepository()
   const bCryptAdapter = new BcryptAdapter(salt)

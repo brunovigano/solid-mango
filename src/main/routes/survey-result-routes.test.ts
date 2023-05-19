@@ -9,7 +9,7 @@ let surveyResultCollection: Collection
 let surveyCollection: Collection
 let accountCollection: Collection
 
-const makeAccessToken = async (): Promise<string> => {
+const mockAccessToken = async (): Promise<string> => {
   const account = await accountCollection.insertOne({
     name: 'Bruno',
     email: 'bruno.vigano189@gmail.com',
@@ -63,7 +63,7 @@ describe('Survey Routes', () => {
     })
 
     test('should return 200 on save survey result with token', async () => {
-      const accessToken = await makeAccessToken()
+      const accessToken = await mockAccessToken()
       const res = await surveyCollection.insertOne({
         question: 'Question',
         answers: [{ answer: 'Answer 1', image: 'http://image-name.com' }, { answer: 'Answer 2' }],
