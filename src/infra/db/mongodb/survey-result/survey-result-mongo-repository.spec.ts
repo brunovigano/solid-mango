@@ -60,7 +60,7 @@ describe('Survey Mongo Repository', () => {
   })
 
   describe('save()', () => {
-    test('Should add a survey result if its new', async () => {
+    test('should add a survey result if its new', async () => {
       const survey = await makeSurvey()
       const account = await makeAccount()
       const sut = makeSut()
@@ -80,7 +80,7 @@ describe('Survey Mongo Repository', () => {
       expect(surveyResult).toBeTruthy()
     })
 
-    test('Should update survey result if its not new', async () => {
+    test('should update survey result if its not new', async () => {
       const survey = await makeSurvey()
       const account = await makeAccount()
       const sut = makeSut()
